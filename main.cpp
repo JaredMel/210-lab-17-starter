@@ -9,6 +9,11 @@ struct Node {
 };
 
 void output(Node *);
+void addNodeToHead(Node *&, Node *&, int);
+void addNodeToTail(Node *&, Node *&, int);
+void deleteNode();
+void insertNode();
+void deleteLinkedList();
 
 int main() {
     Node *head = nullptr;
@@ -18,7 +23,7 @@ int main() {
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
         Node *newVal = new Node;
-        
+        /*
         // adds node at head
         if (!head) { // if this is the first node, it's the new head
             head = newVal;
@@ -30,6 +35,8 @@ int main() {
             newVal->value = tmp_val;
             head = newVal;
         }
+        */
+       addNodeToHead(head, newVal, tmp_val);
     }
     output(head);
 
@@ -111,4 +118,19 @@ void output(Node * hd) {
         current = current->next;
     }
     cout << endl;
+}
+
+void addNodeToHead(Node * &hd, Node * &nv, int val)
+{
+    // adds node at head
+        if (!hd) { // if this is the first node, it's the new head
+            hd = nv;
+            nv->next = nullptr;
+            nv->value = val;
+        }
+        else { // its a second or subsequent node; place at the head
+            nv->next = hd;
+            nv->value = val;
+            hd = nv;
+        }
 }
