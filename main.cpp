@@ -11,7 +11,7 @@ struct Node {
 void output(Node *);
 void addNodeToHead(Node *&, Node *&, int);
 void addNodeToTail(Node *&, Node *&, int);
-void deleteNode();
+void deleteNode(Node *&);
 void insertNode();
 void deleteLinkedList();
 
@@ -39,7 +39,7 @@ int main() {
        addNodeToHead(head, newVal, tmp_val);
     }
     output(head);
-
+    /*
     // deleting a node
     Node * current = head;
     cout << "Which node to delete? " << endl;
@@ -64,8 +64,10 @@ int main() {
         delete current;
         current = nullptr;
     }
+    */
+    deleteNode(head);
     output(head);
-
+    /*
     // insert a node
     current = head;
     cout << "After which node to insert 10000? " << endl;
@@ -91,6 +93,7 @@ int main() {
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
+    */
     output(head);
 
     // deleting the linked list
@@ -133,4 +136,72 @@ void addNodeToHead(Node * &hd, Node * &nv, int val)
             nv->value = val;
             hd = nv;
         }
+}
+
+void addNodeToTail(Node * &tl, Node * &nv, int val)
+{
+
+}
+
+void deleteNode(Node * &hd)
+{
+    // deleting a node
+    Node * current = hd;
+    cout << "Which node to delete? " << endl;
+    output(hd);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+
+    // traverse that many times and delete that node
+    current = hd;
+    Node *prev = hd;
+    for (int i = 0; i < (entry-1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+}
+
+void insertNode()
+{
+    // insert a node
+    current = head;
+    cout << "After which node to insert 10000? " << endl;
+    count = 1;
+    while (current) {
+        cout << "[" << count++ << "] " << current->value << endl;
+        current = current->next;
+    }
+    cout << "Choice --> ";
+    cin >> entry;
+
+    current = head;
+    prev = head;
+    for (int i = 0; i < (entry); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    //at this point, insert a node between prev and current
+    Node * newnode = new Node;
+    newnode->value = 10000;
+    newnode->next = current;
+    prev->next = newnode;
+    output(head);
+}
+
+void deleteLinkedList()
+{
+
 }
