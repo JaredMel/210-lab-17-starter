@@ -23,7 +23,7 @@ int main() {
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
         Node *newVal = new Node;
-        /*
+        
         // adds node at head
         if (!head) { // if this is the first node, it's the new head
             head = newVal;
@@ -35,11 +35,17 @@ int main() {
             newVal->value = tmp_val;
             head = newVal;
         }
-        */
-       addNodeToHead(head, newVal, tmp_val);
+        
+       //addNodeToHead(head, newVal, tmp_val);
     }
     output(head);
-    /*
+
+    //int tmp_val2 = rand() % 100;
+    //Node *newVal = new Node;
+    //addNodeToTail(head, newVal, tmp_val2);
+    //output(head);
+
+    
     // deleting a node
     Node * current = head;
     cout << "Which node to delete? " << endl;
@@ -64,10 +70,10 @@ int main() {
         delete current;
         current = nullptr;
     }
-    */
-    deleteNode(head);
+    
+    //deleteNode(head);
     output(head);
-    /*
+    
     // insert a node
     current = head;
     cout << "After which node to insert 10000? " << endl;
@@ -93,10 +99,10 @@ int main() {
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
-    */
-    insertNode(head);
+    
+    //insertNode(head);
     output(head);
-    /*
+    
     // deleting the linked list
     current = head;
     while (current) {
@@ -105,8 +111,8 @@ int main() {
         current = head;
     }
     head = nullptr;
-    */
-    deleteLinkedList(head);
+    
+    //deleteLinkedList(head);
     output(head);
 
     return 0;
@@ -150,11 +156,13 @@ void addNodeToTail(Node * &hd, Node * &nv, int val)
         nv->value = val;
     }
     else {
-        while (hd->next)
+        while (nv->next != nullptr)
         {
-            /* code */
+            nv = nv->next;
         }
-        
+        nv->next = hd;
+        nv->value = val;
+        hd = nv;
     }
 }
 
