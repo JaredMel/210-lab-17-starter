@@ -12,8 +12,8 @@ void output(Node *);
 void addNodeToHead(Node *&, Node *&, int);
 void addNodeToTail(Node *&, Node *&, int);
 void deleteNode(Node *&);
-void insertNode();
-void deleteLinkedList();
+void insertNode(Node *&);
+void deleteLinkedList(Node *&);
 
 int main() {
     Node *head = nullptr;
@@ -94,8 +94,9 @@ int main() {
     newnode->next = current;
     prev->next = newnode;
     */
+    insertNode(head);
     output(head);
-
+    /*
     // deleting the linked list
     current = head;
     while (current) {
@@ -104,6 +105,8 @@ int main() {
         current = head;
     }
     head = nullptr;
+    */
+    deleteLinkedList(head);
     output(head);
 
     return 0;
@@ -138,9 +141,21 @@ void addNodeToHead(Node * &hd, Node * &nv, int val)
         }
 }
 
-void addNodeToTail(Node * &tl, Node * &nv, int val)
+void addNodeToTail(Node * &hd, Node * &nv, int val)
 {
-
+    // adds node at tail
+    if (!hd) { // if this is the first node, it's the new head
+        hd = nv;
+        nv->next = nullptr;
+        nv->value = val;
+    }
+    else {
+        while (hd->next)
+        {
+            /* code */
+        }
+        
+    }
 }
 
 void deleteNode(Node * &hd)
@@ -171,12 +186,14 @@ void deleteNode(Node * &hd)
     }
 }
 
-void insertNode()
+void insertNode(Node * &hd)
 {
     // insert a node
-    current = head;
+    Node * current = hd;
     cout << "After which node to insert 10000? " << endl;
-    count = 1;
+    int count = 1;
+    int entry;
+    Node *prev = hd;
     while (current) {
         cout << "[" << count++ << "] " << current->value << endl;
         current = current->next;
@@ -184,8 +201,8 @@ void insertNode()
     cout << "Choice --> ";
     cin >> entry;
 
-    current = head;
-    prev = head;
+    current = hd;
+    prev = hd;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
             current = current->next;
@@ -198,10 +215,15 @@ void insertNode()
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
-    output(head);
 }
 
-void deleteLinkedList()
+void deleteLinkedList(Node * &hd)
 {
-
+    Node * current = hd;
+    while (current) {
+        hd = current->next;
+        delete current;
+        current = hd;
+    }
+    hd = nullptr;
 }
